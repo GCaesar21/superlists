@@ -44,13 +44,13 @@ class NewVisitorTest(unittest.TestCase):
 		#the todo item she entered earlier shows "Buy peacock feathers."
 
 		#Press Enter to submit the item and wait 1 second for the page to refresh
-		inputbox.send_keys(Keys.Enter)
+		inputbox.send_keys(Keys.ENTER)
 		time.sleep(1)
 		
 		table=self.browser.find_element(by='id',value='id_list_table')
 		rows=table.find_elements(by='tag name',value='tr')
 		self.assertTrue(
-			any(row.text=='1: Buy peacock feathers' for row in rows)
+			any(row.text=='1: Buy peacock feathers' for row in rows),"New to-do item did not appear in table"
 		)
 
 		#A text box is displayed where you can enter additional items
