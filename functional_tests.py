@@ -38,20 +38,27 @@ class NewVisitorTest(unittest.TestCase):
 		)
 
 		#She typed "Buy peacock feathers" into the text field.
-		inputbox.send_keys('Buy peacock feathers')
-
 		#After pressing the Enter key, the page updates
 		#the todo item she entered earlier shows "Buy peacock feathers."
-
 		#Press Enter to submit the item and wait 1 second for the page to refresh
+		inputbox.send_keys('Buy peacock feathers')
 		inputbox.send_keys(Keys.ENTER)
 		time.sleep(1)
 		
 		table=self.browser.find_element(by='id',value='id_list_table')
 		rows=table.find_elements(by='tag name',value='tr')
-		self.assertTrue(
-			any(row.text=='1: Buy peacock feathers' for row in rows),"New to-do item did not appear in table"
-		)
+		self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
+
+		#Enter the second to-do item
+		inputbox=self.browser.find_element(by='id',value='id_new_item')
+		inputbox.send_keys('Use peacock feathers to make fly')
+		inputbox.send_keys(Keys.ENTER)
+		time.sleep(1)
+
+		table=self.browser.find_element(by='id',value='id_list_table')
+		rows=table.find_elements(by='tag name',value='tr')
+		self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
+		self.assertIn('2: Use peacock feathers to make fly', [row.text for row in rows])		
 
 		#A text box is displayed where you can enter additional items
 		self.fail('Finish the test!')
