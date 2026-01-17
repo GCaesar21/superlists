@@ -2,10 +2,11 @@ from selenium import webdriver
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
+from django.test import LiveServerTestCase
 import time
 import unittest
 
-class NewVisitorTest(unittest.TestCase):   
+class NewVisitorTest(LiveServerTestCase):   
 
 
 	def setUp(self):
@@ -23,7 +24,7 @@ class NewVisitorTest(unittest.TestCase):
 		self.assertIn(row_text,[row.text for row in rows])
 	
 	def test_can_start_a_list_and_retrieve_it_later(self):
-		self.browser.get('http://localhost:8000')
+		self.browser.get(self.live_server_url)
 		self.browser.implicitly_wait(10)
 
 		#The title and header of the website contain the word "To-Do"
@@ -64,6 +65,6 @@ class NewVisitorTest(unittest.TestCase):
 		#self.fail('Finish the test!')
 
 
-if __name__=='__main__':
-	unittest.main(warnings='ignore')
+#if __name__=='__main__':
+#	unittest.main(warnings='ignore')
 #assert 'successfully' in browser.title, "Browser title was " +browser.title
