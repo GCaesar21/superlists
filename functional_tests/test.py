@@ -86,7 +86,7 @@ class NewVisitorTest(LiveServerTestCase):
 
 		#The first user notices that the list has a unique URL
 		edith_list_url=self.browser.current_url
-		self.assertRegex(edith_list_url,'/list/.+')
+		self.assertRegex(edith_list_url,'/lists/.+')
 
 		#The second user visits the website
 		#Use a new browser session
@@ -109,7 +109,7 @@ class NewVisitorTest(LiveServerTestCase):
 
 		#
 		francis_list_url=self.browser.current_url
-		self.assertRegex(edith_list_url,'/list/.+')
+		self.assertRegex(edith_list_url,'/lists/.+')
 		self.assertNotEqual(francis_list_url,edith_list_url)
 
 		#
